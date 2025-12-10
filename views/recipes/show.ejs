@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= recipe.name %></title>
+</head>
+<body>
+  <%- include('../partials/_nav.ejs') %>
+  <h1><%= recipe.name %></h1>
+
+  <h3>Instructions:</h3>
+  <% if (recipe.instructions) { %>
+    <p><%= recipe.instructions %></p>
+  <% } else { %>
+    <p>No instructions provided.</p>
+  <% } %>
+
+  <h3>Ingredients:</h3>
+  <% if (recipe.ingredients && recipe.ingredients.length > 0) { %>
+    <ul>
+      <% recipe.ingredients.forEach(ingredient => { %>
+        <li><%= ingredient.name %></li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No ingredients listed.</p>
+  <% } %>
+
+  <br>
+  <a href="/recipes/<%= recipe._id %>/edit">Edit Recipe</a>
+  <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST" style="display: inline;">
+    <button type="submit">Delete Recipe</button>
+  </form>
+  <br><br>
+  <a href="/recipes">Back to Recipes</a>
+</body>
+</html>

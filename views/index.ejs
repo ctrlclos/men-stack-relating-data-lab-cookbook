@@ -3,21 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+  <title>CookBook</title>
 </head>
 <body>
+  <%- include('./partials/_nav.ejs') %>
+  <h1>Welcome to CookBook</h1>
+  <p>Your personal recipe organizer and management tool.</p>
   <% if (user) { %>
-    <h1>Welcome to the app, <%= user.username %>!</h1>
-    <p>
-      <a href="/auth/sign-out">Sign out</a>
-    </p>
+    <p>Ready to get cooking? <a href="/recipes">View your recipes</a> or <a href="/recipes/new">create a new one</a>!</p>
   <% } else { %>
-    <h1>Welcome to the app, guest.</h1>
-    <p>
-      <a href="/auth/sign-up">Sign up</a> or
-      <a href="/auth/sign-in">Sign in</a>.
-    </p>
+    <p>Please <a href="/auth/sign-in">sign in</a> or <a href="/auth/sign-up">sign up</a> to start managing your recipes.</p>
   <% } %>
-  <p><a href="/vip-lounge">Get into the VIP Users Only lounge!</a></p>
 </body>
 </html>

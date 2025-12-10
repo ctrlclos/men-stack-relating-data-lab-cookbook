@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Recipe</title>
+</head>
+<body>
+  <%- include('../partials/_nav.ejs') %>
+  <h1>Edit Recipe</h1>
+  <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+    <div>
+      <label for="name">Recipe Name:</label><br>
+      <input type="text" id="name" name="name" value="<%= recipe.name %>" required>
+    </div>
+    <div>
+      <label for="instructions">Instructions:</label><br>
+      <textarea id="instructions" name="instructions" rows="5" cols="40"><%= recipe.instructions || '' %></textarea>
+    </div>
+    <div>
+      <label>Ingredients:</label><br>
+      <% if (ingredients.length > 0) { %>
+        <% ingredients.forEach(ingredient => { %>
+          <label>
+            <input type="checkbox" name="ingredients" value="<%= ingredient._id %>"
+              <%= recipe.ingredients.some(ri => ri.equals(ingredient._id)) ? 'checked' : '' %>>
+            <%= ingredient.name %>
+          </label><br>
+        <% }) %>
+      <% } else { %>
+        <p>No ingredients available. <a href="/ingredients">Add some ingredients first</a>.</p>
+      <% } %>
+    </div>
+    <br>
+    <button type="submit">Update Recipe</button>
+  </form>
+  <br>
+  <a href="/recipes/<%= recipe._id %>">Cancel</a>
+  <a href="/recipes">Back to Recipes</a>
+</body>
+</html>

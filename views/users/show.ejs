@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= profileUser.username %>'s Recipes</title>
+</head>
+<body>
+  <%- include('../partials/_nav.ejs') %>
+  <h1><%= profileUser.username %>'s Recipes</h1>
+
+  <% if (recipes.length > 0) { %>
+    <% recipes.forEach(recipe => { %>
+      <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+        <h3><%= recipe.name %></h3>
+        <% if (recipe.instructions) { %>
+          <p><strong>Instructions:</strong> <%= recipe.instructions %></p>
+        <% } %>
+        <% if (recipe.ingredients && recipe.ingredients.length > 0) { %>
+          <p><strong>Ingredients:</strong></p>
+          <ul>
+            <% recipe.ingredients.forEach(ingredient => { %>
+              <li><%= ingredient.name %></li>
+            <% }) %>
+          </ul>
+        <% } %>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>This user hasn't created any recipes yet.</p>
+  <% } %>
+
+  <br>
+  <a href="/users">Back to Community</a>
+</body>
+</html>
