@@ -18,6 +18,9 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const existingIngredient = await Ingredient.findOne({
+      /**prevent duplicate entries in the
+      database while ignoring case
+      differences */
       name: { $regex: new RegExp(`^${req.body.name}$`, 'i') }
     });
     if (existingIngredient) {

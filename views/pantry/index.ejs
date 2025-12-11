@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Pantry</title>
+</head>
+<body>
+  <%- include('../partials/_nav.ejs') %>
+  <h1>My Pantry</h1>
+  <p>Track the foods you have at home.</p>
+
+  <h2>Add to Pantry</h2>
+  <form action="/pantry" method="POST">
+    <label for="name">Food Name:</label>
+    <input type="text" id="name" name="name" required>
+    <button type="submit">Add to Pantry</button>
+  </form>
+
+  <h2>Foods in My Pantry</h2>
+  <% if (pantry.length > 0) { %>
+    <ul>
+      <% pantry.forEach(item => { %>
+        <li>
+          <%= item.name %>
+          <form action="/pantry/<%= item._id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button type="submit">Remove</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>Your pantry is empty. Add some foods you have at home!</p>
+  <% } %>
+
+  <br>
+  <a href="/recipes">Back to Recipes</a>
+</body>
+</html>
